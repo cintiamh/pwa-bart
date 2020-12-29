@@ -11,11 +11,11 @@ module.exports = {
     entry: './src/index.tsx',
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: path.resolve(__dirname, 'public')
+        contentBase: path.resolve(__dirname, 'docs')
     },
 	output: {
 		filename: 'index.js',
-        path: path.resolve(__dirname, 'public')
+        path: path.resolve(__dirname, 'docs')
     },
     plugins: [
         new CleanWebpackPlugin(),
