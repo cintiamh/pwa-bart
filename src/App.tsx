@@ -1,6 +1,5 @@
 import './css/app.css';
 import React from 'react';
-import NavigationBar from './components/NavigationBar';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,7 +11,6 @@ import HomePage from './pages/HomePage';
 export default function () {
     return (
         <Router>
-            <NavigationBar />
             <Switch>
                 <Route path="/">
                     <HomePage />

@@ -18,5 +18,12 @@ type Props = {
 
 export default function ({ station }: Props) {
     console.log('station', station);
-    return (<div></div>)
+    return (
+        <article>
+            <header>
+                <h2>{station.name}</h2>
+            </header>
+            <p>{ station.address}, { station.city }</p>
+        </article>
+    )
 }

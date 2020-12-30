@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BART_API_STATIONS_URL } from '../utils';
 import StationCard from '../components/StationCard';
+import SearchBar from '../components/SearchBar';
 
 export default function () {
     const [stations, setStations] = useState([]);
@@ -22,10 +23,13 @@ export default function () {
     }, []);
 
     return (
-        <div>
-            {stations.map(
-                station => <StationCard station={station} key={station.abbr} />
-            )}
-        </div>
+        <>
+            <SearchBar />
+            <section>
+                {stations.map(
+                    station => <StationCard station={station} key={station.abbr} />
+                )}
+            </section>
+        </>
     );
 };
