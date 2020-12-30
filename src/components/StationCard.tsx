@@ -1,4 +1,8 @@
+import '../css/station-card.css';
 import React from 'react';
+import {
+  Link
+} from "react-router-dom";
 
 export type StationType = {
     name: string,
@@ -17,13 +21,14 @@ type Props = {
 }
 
 export default function ({ station }: Props) {
-    console.log('station', station);
     return (
-        <article>
-            <header>
-                <h2>{station.name}</h2>
-            </header>
-            <p>{ station.address}, { station.city }</p>
+        <article className="StationCard">
+            <Link to={`/station/${station.abbr}`}>
+                <header>
+                    <h2>{station.name}</h2>
+                </header>
+            <p>{station.address}, {station.city}</p>
+            </Link>
         </article>
     )
 }

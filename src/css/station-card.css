@@ -1,0 +1,15 @@
+.StationCard {
+    padding: 12px;
+}
+
+.StationCard a {
+    color: var(--neutral-200);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.StationCard h2 {
+    color: var(--neutral-100);
+    font-weight: bold;
+    font-size: 18px;
+}

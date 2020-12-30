@@ -1,3 +1,4 @@
+import '../css/home-page.css';
 import React, { useEffect, useState } from 'react';
 import { BART_API_STATIONS_URL } from '../utils';
 import StationCard from '../components/StationCard';
@@ -25,7 +26,8 @@ export default function () {
     return (
         <>
             <SearchBar />
-            <section>
+            <section className="HomePage">
+                <h3>Stations</h3>
                 {stations.map(
                     station => <StationCard station={station} key={station.abbr} />
                 )}
