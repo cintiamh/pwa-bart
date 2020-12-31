@@ -9,7 +9,6 @@ type Props = {
 };
 
 export default function HomePage({ stations }: Props) {
-  console.log("HOME");
   return (
     <>
       <SearchBar />

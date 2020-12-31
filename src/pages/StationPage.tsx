@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import { StationType } from "../types";
+import StationDepartures from "../components/StationDepartures";
 
 type StationRouteProp = {
   abbr: string;
@@ -42,10 +43,17 @@ export default function StationPage({ stations }: Props) {
     );
   };
 
+  const renderDepartures = () => {
+    if (!station) {
+      return null;
+    }
+    return <StationDepartures station={station} />;
+  };
+
   return (
     <>
       {renderHeader()}
-      <section className="StationPage"></section>
+      {renderDepartures()}
     </>
   );
 }
