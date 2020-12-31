@@ -1,19 +1,19 @@
 import "../css/station-page.css";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { StationsContext, StationType } from "../context/StationsContext";
 import BackButton from "../components/BackButton";
+import { StationType } from "../types";
 
 type StationRouteProp = {
   abbr: string;
 };
 
-type StationPageBodyProps = {
-  abbr: string;
+type Props = {
   stations: StationType[];
 };
 
-function StationPageBody({ abbr, stations }: StationPageBodyProps) {
+export default function StationPage({ stations }: Props) {
+  const { abbr } = useParams<StationRouteProp>();
   const [station, setStation] = useState<StationType | null>(null);
 
   useEffect(() => {
@@ -47,15 +47,5 @@ function StationPageBody({ abbr, stations }: StationPageBodyProps) {
       {renderHeader()}
       <section className="StationPage"></section>
     </>
-  );
-}
-
-export default function StationPage() {
-  const { abbr } = useParams<StationRouteProp>();
-
-  return (
-    <StationsContext.Consumer>
-      {(stations) => <StationPageBody abbr={abbr} stations={stations} />}
-    </StationsContext.Consumer>
   );
 }
