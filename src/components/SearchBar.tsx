@@ -2,21 +2,26 @@ import "../css/search-bar.css";
 import React, { useState } from "react";
 import CloseButton from "./CloseButton";
 
-export default function () {
+type Props = {
+  onEnterSearch?: (searchStr: string) => void;
+};
+
+export default function SearchBar({ onEnterSearch }: Props) {
   const [searchStr, setSearchStr] = useState("");
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchStr(e.target.value);
-  };
-
-  const handleInputEnterKey = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      console.log("ENTER", e);
+  const updateSearchStr = (value: string) => {
+    setSearchStr(value);
+    if (onEnterSearch) {
+      onEnterSearch(value);
     }
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateSearchStr(e.target.value);
+  };
+
   const handleClickClose = () => {
-    setSearchStr("");
+    updateSearchStr("");
   };
 
   return (
@@ -25,7 +30,6 @@ export default function () {
         <input
           className="SearchInput"
           onChange={handleInputChange}
-          onKeyDown={handleInputEnterKey}
           placeholder="Search stations"
           type="text"
           value={searchStr}
