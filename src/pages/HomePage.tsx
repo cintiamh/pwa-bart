@@ -1,37 +1,25 @@
 import '../css/home-page.css';
-import React, { useEffect, useState } from 'react';
-import { BART_API_STATIONS_URL } from '../utils';
+import React from 'react';
 import StationCard from '../components/StationCard';
 import SearchBar from '../components/SearchBar';
+import { StationsContext } from '../context/StationsContext';
 
 export default function () {
-    const [stations, setStations] = useState([]);
-
-    useEffect(() => {
-        fetch(BART_API_STATIONS_URL)
-            .then(response => response.json())
-            .then(data => {
-                const stationsArr = data?.root?.stations?.station || [];
-                setStations(stationsArr.map((station: any) => {
-                    return {
-                        ...station,
-                        gtfs_latitude: parseFloat(station.gtfs_latitude),
-                        gtfs_longitude: parseFloat(station.gtfs_longitude),
-                        zipcode: parseInt(station.zipcode)
-                    }
-                }));
-            });
-    }, []);
-
     return (
-        <>
-            <SearchBar />
-            <section className="HomePage">
-                <h3>Stations</h3>
-                {stations.map(
-                    station => <StationCard station={station} key={station.abbr} />
-                )}
-            </section>
-        </>
+        <StationsContext.Consumer>
+            {
+                stations => (
+                    <>
+                        <SearchBar />
+                        <section className="HomePage">
+                            <h3>Stations</h3>
+                            {stations.map(
+                                station => <StationCard station={station} key={station.abbr} />
+                            )}
+                        </section>
+                    </>
+                )
+            }
+        </StationsContext.Consumer>
     );
 };

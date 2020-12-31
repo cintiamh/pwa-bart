@@ -1,5 +1,5 @@
 import './css/app.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,21 +8,43 @@ import {
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 import StationPage from './pages/StationPage';
+import { BART_API_STATIONS_URL } from './utils';
+import { StationsContext } from './context/StationsContext';
 
-export default function () {
+export default function App() {
+    const [stations, setStations] = useState([]);
+
+    useEffect(() => {
+        fetch(BART_API_STATIONS_URL)
+            .then(response => response.json())
+            .then(data => {
+                const stationsArr = data?.root?.stations?.station || [];
+                setStations(stationsArr.map((station: any) => {
+                    return {
+                        ...station,
+                        gtfs_latitude: parseFloat(station.gtfs_latitude),
+                        gtfs_longitude: parseFloat(station.gtfs_longitude),
+                        zipcode: parseInt(station.zipcode)
+                    }
+                }));
+            });
+    }, []);
+
     return (
-        <Router>
-            <Switch>
-                <Route path="/search">
-                    <SearchPage />
-                </Route>
-                <Route path="/station/:abbr">
-                    <StationPage />
-                </Route>
-                <Route path="/">
-                    <HomePage />
-                </Route>
-            </Switch>
-        </Router>
+        <StationsContext.Provider value={stations}>
+            <Router>
+                <Switch>
+                    <Route exact path="/">
+                        <HomePage />
+                    </Route>
+                    <Route path="/search">
+                        <SearchPage />
+                    </Route>
+                    <Route path="/station/:abbr">
+                        <StationPage />
+                    </Route>
+                </Switch>
+            </Router>
+        </StationsContext.Provider>
     );
 }
