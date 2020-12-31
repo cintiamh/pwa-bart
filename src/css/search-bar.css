@@ -16,18 +16,30 @@
     background-color: var(--primary-300);
     border-radius: 6px;
     display: flex;
+    padding: 0 12px;
     width: 100%;
+}
+
+.SearchInput {
+    background-color: var(--primary-300);
+    color: var(--primary-700);
+    width: 100%;
+}
+
+.SearchInput::placeholder {
+    color: var(--primary-600);
+    opacity: 1; /* Firefox */
+}
+
+.SearchInput:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--primary-600);
+}
+
+.SearchInput::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--primary-600);
 }
 
 .SearchBar-wrapper button {
     background-color: var(--primary-300);
-    border: none;
     border-radius: 6px;
-    outline: none;
-}
-
-.SearchLink a {
-    color: var(--primary-600);
-    text-decoration: none;
-    width: 100%;
 }

@@ -1,9 +1,9 @@
 .HomePage {
     padding: 8px;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .HomePage h3 {
-    color: var(--primary-200);
-    font-weight: bold;
     padding: 8px 12px;
 }

@@ -50,21 +50,50 @@ table {
 /* APP styling */
 
 html {
-    height: 100%;
+    height: 100vh;
 }
 
 body {
-    color: var(--neutral-100);
+    background-color: var(--neutral-700);
+    color: var(--neutral-200);
     font-family: Roboto, Arial, Helvetica, sans-serif;
     font-size: 16px;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
+}
+
+button {
+    background-color: var(--neutral-700);
+    border: none;
+    outline: none;
+}
+
+a {
+    color: var(--neutral-100);
+    text-decoration: none;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+h3 {
+    color: var(--primary-200);
+    font-weight: bold;
+}
+
+input[type="text" i] {
+    border: none;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    outline: none;
 }
 
 #root {
     display: block;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
 }
 
 /* Colors */
