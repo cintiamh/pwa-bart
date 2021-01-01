@@ -9,3 +9,28 @@ export type StationType = {
   state: string;
   zipcode: number;
 };
+
+export type EstimateType = {
+  bikeflag: boolean;
+  color: string;
+  delay: boolean;
+  direction: string;
+  hexcolor: string;
+  length: number;
+  minutes: number;
+  platform: string;
+  time?: Date;
+};
+
+export type EtdType = {
+  abbreviation: string;
+  destination: string;
+  estimate: EstimateType[];
+  limited: boolean;
+};
+
+export type DeparturesType = {
+  abbr: string;
+  etd: EtdType[];
+  name: string;
+};

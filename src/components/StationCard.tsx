@@ -1,8 +1,5 @@
 import "../css/station-card.css";
 import React from "react";
-// import {
-//   Link
-// } from "react-router-dom";
 
 export type StationType = {
   name: string;
@@ -17,28 +14,27 @@ export type StationType = {
 };
 
 type Props = {
+  onClick?: (station: StationType) => void;
   station: StationType;
 };
 
-export default function ({ station }: Props) {
+export default function ({ onClick, station }: Props) {
+  const handleClickCard = () => {
+    if (onClick) {
+      onClick(station);
+    }
+  };
+
   return (
     <article className="StationCard">
-      <header>
-        <h2>{station.name}</h2>
-      </header>
-      <p>
-        {station.address}, {station.city}
-      </p>
+      <a onClick={handleClickCard}>
+        <header>
+          <h2>{station.name}</h2>
+        </header>
+        <p>
+          {station.address}, {station.city}
+        </p>
+      </a>
     </article>
   );
-  // return (
-  //     <article className="StationCard">
-  //         <Link to={`/station/${station.abbr}`}>
-  //             <header>
-  //                 <h2>{station.name}</h2>
-  //             </header>
-  //         <p>{station.address}, {station.city}</p>
-  //         </Link>
-  //     </article>
-  // )
 }

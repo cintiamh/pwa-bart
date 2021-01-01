@@ -1,9 +1,14 @@
-import React from 'react';
-import ArrowBackIcon from './ArrowBackIcon';
-import {
-  Link
-} from "react-router-dom";
+import React from "react";
+import ArrowBackIcon from "./ArrowBackIcon";
 
-export default function () {
-    return (<Link to="/"><ArrowBackIcon /></Link>);
+type Props = {
+  onClick?: () => void;
+};
+
+export default function BackButton({ onClick }: Props) {
+  return (
+    <a onClick={onClick}>
+      <ArrowBackIcon />
+    </a>
+  );
 }
