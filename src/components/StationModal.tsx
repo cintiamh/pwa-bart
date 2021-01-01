@@ -1,16 +1,26 @@
 import "../css/station-modal.css";
 import React from "react";
 import ReactDOM from "react-dom";
-import { StationType } from "../types";
+import { DeparturesType, EstimateType, StationType } from "../types";
 import BackButton from "../components/BackButton";
 
 type Props = {
+  departures?: DeparturesType;
   onClose: () => void;
   station: StationType;
 };
 
-export default function StationModal({ onClose, station }: Props) {
+export default function StationModal({ departures, onClose, station }: Props) {
   const className = `StationModal${station !== null ? " expanded" : ""}`;
+
+  const getMinutesFromNow = (estimate: EstimateType) => {
+    if (!estimate.time) {
+      return estimate.minutes;
+    }
+    const now = new Date();
+    const diff = Math.floor((estimate.time.getTime() - now.getTime()) / 60000);
+    return isNaN(diff) ? "arriving" : `${diff} min`;
+  };
 
   const renderHeaderContent = () => {
     if (!station) {
@@ -27,10 +37,35 @@ export default function StationModal({ onClose, station }: Props) {
   };
 
   const renderBodyContent = () => {
-    if (!station) {
+    if (!departures) {
       return null;
     }
-    return <div className="StationModal-body"></div>;
+    const { etd } = departures;
+    return (
+      <div className="StationModal-body">
+        {etd.map((e) => (
+          <div
+            className="StationModal-etd"
+            key={`${departures.abbr}-${e.abbreviation}`}
+          >
+            <div className="StationModal-etd-destination">
+              <h3>{e.destination}</h3>
+            </div>
+            {e.estimate.map((estimate) => (
+              <div
+                key={`${departures.abbr}-${e.abbreviation}-${getMinutesFromNow(
+                  estimate
+                )}`}
+              >
+                <div className="StationModal-etd-time">
+                  {getMinutesFromNow(estimate)}
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
   };
 
   return ReactDOM.createPortal(
