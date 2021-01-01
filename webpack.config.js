@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const {
     NODE_ENV = 'production'
@@ -23,6 +24,7 @@ module.exports = {
             title: 'Development',
             template: 'src/index.html'
         }),
+        new MiniCssExtractPlugin()
     ],
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
@@ -36,7 +38,7 @@ module.exports = {
             },
             {
                 test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,

@@ -14,12 +14,15 @@ export type StationType = {
 };
 
 type Props = {
+  onClick?: (station: StationType) => void;
   station: StationType;
 };
 
-export default function ({ station }: Props) {
+export default function ({ onClick, station }: Props) {
   const handleClickCard = () => {
-    console.log("Clicked", station);
+    if (onClick) {
+      onClick(station);
+    }
   };
 
   return (
