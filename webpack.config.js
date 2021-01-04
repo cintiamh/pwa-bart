@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {InjectManifest} = require('workbox-webpack-plugin');
 
 const {
     NODE_ENV = 'production'
@@ -24,7 +25,19 @@ module.exports = {
             title: 'Development',
             template: 'src/index.html'
         }),
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin(),
+        new InjectManifest({
+            swSrc: path.join(process.cwd(), '/src/sw.js'),
+            swDest: 'sw.js',
+            maximumFileSizeToCacheInBytes: 4000000,
+            exclude: [
+                /\.map$/,
+                /manifest$/,
+                /\.htaccess$/,
+                /service-worker\.js$/,
+                /sw\.js$/,
+            ],
+        })
     ],
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
