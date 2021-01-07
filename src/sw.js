@@ -1,5 +1,11 @@
-import {precacheAndRoute} from 'workbox-precaching';
-// Your other import statements go here.
+import { precacheAndRoute } from 'workbox-precaching';
+import { registerRoute } from 'workbox-routing';
+import { StaleWhileRevalidate } from 'workbox-strategies';
 
+// workbox needs this for caching.
 precacheAndRoute(self.__WB_MANIFEST);
-// Your other SW code goes here.
+
+// registerRoute(
+//   ({url}) => url.pathname.startsWith('/images/avatars/'),
+//   new StaleWhileRevalidate()
+// );
