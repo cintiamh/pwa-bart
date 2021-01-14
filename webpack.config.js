@@ -32,7 +32,8 @@ module.exports = {
             maximumFileSizeToCacheInBytes: 4000000,
             additionalManifestEntries: [
                 { url: 'index.html', revision: '1' }
-            ]
+            ],
+            mode: NODE_ENV,
         })
     ],
     resolve: {
