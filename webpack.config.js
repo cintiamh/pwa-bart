@@ -16,7 +16,7 @@ module.exports = {
         contentBase: path.resolve(__dirname, 'docs')
     },
 	output: {
-		filename: 'index.js',
+		filename: 'main.js',
         path: path.resolve(__dirname, 'docs')
     },
     plugins: [
@@ -28,14 +28,11 @@ module.exports = {
         new MiniCssExtractPlugin(),
         new InjectManifest({
             swSrc: path.join(process.cwd(), '/src/sw.js'),
-            swDest: 'sw.js',
+            swDest: 'service-worker.js',
             maximumFileSizeToCacheInBytes: 4000000,
-            exclude: [
-                /\.map$/,
-                /manifest$/,
-                /\.htaccess$/,
-                /sw\.js$/,
-            ],
+            additionalManifestEntries: [
+                { url: 'index.html', revision: '1' }
+            ]
         })
     ],
     resolve: {
