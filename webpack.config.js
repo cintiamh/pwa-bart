@@ -31,7 +31,7 @@ module.exports = {
             swDest: 'service-worker.js',
             maximumFileSizeToCacheInBytes: 4000000,
             additionalManifestEntries: [
-                { url: 'index.html', revision: '1' }
+                { url: 'index.html', revision: '2' }
             ],
             mode: NODE_ENV,
         })
