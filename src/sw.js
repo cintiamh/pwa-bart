@@ -1,7 +1,8 @@
 import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
-import {CacheableResponsePlugin} from 'workbox-cacheable-response';
+import { CacheableResponsePlugin } from 'workbox-cacheable-response';
+import {ExpirationPlugin} from 'workbox-expiration';
 
 // workbox needs this for caching.
 precacheAndRoute(self.__WB_MANIFEST);
@@ -31,6 +32,14 @@ self.addEventListener('fetch', event => {
     const url = new URL(request.url);
     console.log(url, url.origin);
     if (url.origin === 'https://api.bart.gov') {
-        event.respondWith(new StaleWhileRevalidate().handle({event, request}))
+        event.respondWith(new StaleWhileRevalidate({
+            cacheName: 'bart-api',
+            plugins: [
+                new ExpirationPlugin({
+                    maxEntries: 60,
+                    maxAgeSeconds: 60 * 60, // 1h
+                }),
+            ],
+        }).handle({event, request}))
     } 
 })
